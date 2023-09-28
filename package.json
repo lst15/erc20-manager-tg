@@ -4,5 +4,8 @@
   },
   "devDependencies": {
     "ethers": "^6.7.1"
+  },
+  "scripts":{
+    "dev":"tsx watch ./src/app.ts"
   }
 }
