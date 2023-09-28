@@ -4,6 +4,7 @@
 import { abi } from "./contract/abi-contract";
 import { code } from "./contract/code-contract";
 import { DeployContractController } from "./controller/deploy-contract.controller";
+import { GenByteContractController } from "./controller/gen-byte-contract.controller";
 import { env } from "./env-schema";
 import { ethersProvider } from "./lib/ethers-provider";
 const solc = require("solc");
@@ -41,62 +42,67 @@ const solc = require("solc");
 //   console.log(deploy);
 // })();
 
+// (async () => {
+//   let rename = code.split('unicode"NOBODY"').join('unicode"CAFE"');
+
+//   const input = {
+//     language: "Solidity",
+//     sources: {
+//       "Elon.sol": {
+//         content: rename,
+//       },
+//     },
+//     settings: {
+//       outputSelection: {
+//         "*": {
+//           "*": ["*"],
+//         },
+//       },
+//     },
+//   };
+
+//   getting the development snapshot
+//   solc.loadRemoteVersion(
+//     "v0.8.10+commit.fc410830",
+//     async function (
+//       err: any,
+//       solcSnapshot: { compile: (contract: string) => any }
+//     ) {
+//       if (err) {
+//         console.log(err);
+//         An error was encountered, display and quit
+//       } else {
+//         const compiledContract = JSON.parse(
+//           solcSnapshot.compile(JSON.stringify(input))
+//         );
+//         const bytecode =
+//           compiledContract.contracts["Elon.sol"]["Elon"].evm.bytecode.object;
+
+//         const deploy = await DeployContractController(
+//           env.PRIVATE_KEY,
+//           ethersProvider,
+//           abi,
+//           bytecode
+//         );
+//         console.log(deploy);
+//       }
+//     }
+//   );
+
+//const compiledContract = JSON.parse(solc.compile(JSON.stringify(input)));
+//const bytecode =
+//compiledContract.contracts["Elon.sol"]["Elon"].evm.bytecode.object;
+//console.log(compiledContract);
+// const deploy = await DeployContractController(
+//   env.PRIVATE_KEY,
+//   ethersProvider,
+//   abi,
+//   bytecode
+// );
+// console.log(deploy);
+//})();
+
 (async () => {
-  let rename = code.split('unicode"NOBODY"').join('unicode"CAFE"');
-
-  const input = {
-    language: "Solidity",
-    sources: {
-      "Elon.sol": {
-        content: rename,
-      },
-    },
-    settings: {
-      outputSelection: {
-        "*": {
-          "*": ["*"],
-        },
-      },
-    },
-  };
-
-  // getting the development snapshot
-  solc.loadRemoteVersion(
-    "v0.8.10+commit.fc410830",
-    async function (
-      err: any,
-      solcSnapshot: { compile: (contract: string) => any }
-    ) {
-      if (err) {
-        console.log(err);
-        // An error was encountered, display and quit
-      } else {
-        const compiledContract = JSON.parse(
-          solcSnapshot.compile(JSON.stringify(input))
-        );
-        const bytecode =
-          compiledContract.contracts["Elon.sol"]["Elon"].evm.bytecode.object;
-
-        const deploy = await DeployContractController(
-          env.PRIVATE_KEY,
-          ethersProvider,
-          abi,
-          bytecode
-        );
-        console.log(deploy);
-      }
-    }
-  );
-
-  //const compiledContract = JSON.parse(solc.compile(JSON.stringify(input)));
-  //const bytecode =
-  //compiledContract.contracts["Elon.sol"]["Elon"].evm.bytecode.object;
-  //console.log(compiledContract);
-  // const deploy = await DeployContractController(
-  //   env.PRIVATE_KEY,
-  //   ethersProvider,
-  //   abi,
-  //   bytecode
-  // );
-  // console.log(deploy);
+  const bytecode = await GenByteContractController("Elon.sol", code);
+  console.log(bytecode);
 })();

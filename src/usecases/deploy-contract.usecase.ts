@@ -1,6 +1,6 @@
 import { ethers } from "ethers";
-import { EthersWeb3Repository } from "../repositories/implementations/ethers-web3.repository";
 import { InsufficientFunds } from "../errors/insufficient_funds.error";
+import { Web3Repository } from "../repositories/web3.repository";
 
 interface DeployContractUseCaseRequest {
   private_key: string;
@@ -10,7 +10,7 @@ interface DeployContractUseCaseRequest {
 }
 
 export class DeployContractUseCase {
-  constructor(private web3Repository: EthersWeb3Repository) {}
+  constructor(private web3Repository: Web3Repository) {}
 
   async exec({
     private_key,
