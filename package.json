@@ -3,9 +3,10 @@
     "typescript": "^5.2.2"
   },
   "devDependencies": {
+    "dotenv": "^16.3.1",
     "ethers": "^6.7.1"
   },
-  "scripts":{
-    "dev":"tsx watch ./src/app.ts"
+  "scripts": {
+    "dev": "tsx watch ./src/app.ts"
   }
 }
