@@ -6,10 +6,13 @@ interface SetNameContractUseCaseRequest {
 
 export class SetNameContractUseCase {
   exec({ token_name, symbol, code }: SetNameContractUseCaseRequest) {
-    let modified;
+    let modified = code
+      .split('unicode"NAME_TOKEN"')
+      .join(`unicode"${token_name}"`);
 
-    modified = code.split('unicode"NAME_TOKEN"').join(`unicode"${token_name}"`);
-    modified = code.split('unicode"TICKER_TOKEN"').join(`unicode"${symbol}"`);
+    modified = modified
+      .split('unicode"TICKER_TOKEN"')
+      .join(`unicode"${symbol}"`);
 
     return modified;
   }
