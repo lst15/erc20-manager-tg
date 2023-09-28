@@ -1,7 +1,7 @@
 import "dotenv/config";
 
 type envSchema = {
-  ENDPOINT_BSC: string;
+  ENDPOINT_RPC: string;
   PRIVATE_KEY: string;
 };
 
