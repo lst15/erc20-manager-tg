@@ -38,6 +38,8 @@ export class DeployContractUseCase {
       if (code == "INSUFFICIENT_FUNDS") {
         throw new InsufficientFunds();
       }
+
+      throw error;
     }
   }
 }

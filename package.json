@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "solc": "^0.8.21",
     "typescript": "^5.2.2"
   },
   "devDependencies": {
