@@ -8,4 +8,10 @@ export interface Web3Repository {
     bytecode: string,
     wallet: ethers.Wallet
   ): ethers.ContractFactory;
+
+  setContract(
+    address: string,
+    abi: string,
+    provider: ethers.Wallet
+  ): ethers.Contract;
 }

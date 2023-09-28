@@ -6,6 +6,7 @@ import { code } from "./contract/code-contract";
 import { DeployContractController } from "./controller/deploy-contract.controller";
 import { GenByteContractController } from "./controller/gen-byte-contract.controller";
 import { SetNameContactController } from "./controller/set-name-contract.controller";
+import { TransferTokensContractController } from "./controller/transfer-tokens-contract.controller";
 import { env } from "./env-schema";
 import { ethersProvider } from "./lib/ethers-provider";
 const solc = require("solc");
@@ -104,14 +105,21 @@ const solc = require("solc");
 //})();
 
 (async () => {
-  const codeWithName = SetNameContactController("Babuino", "BBI", code);
-  const bytecode = await GenByteContractController("Elon.sol", codeWithName);
-
-  const deploy = await DeployContractController(
-    env.PRIVATE_KEY,
+  const transferTokens = TransferTokensContractController(
     ethersProvider,
+    "0x7a4b403448ef5ea4a5fe427f52e1856fbe2359e7",
     abi,
-    bytecode
+    1,
+    env.PRIVATE_KEY
   );
-  console.log(deploy);
+  // const codeWithName = SetNameContactController("Babuino", "BBI", code);
+  // const bytecode = await GenByteContractController("Elon.sol", codeWithName);
+
+  // const deploy = await DeployContractController(
+  //   env.PRIVATE_KEY,
+  //   ethersProvider,
+  //   abi,
+  //   bytecode
+  // );
+  // console.log(deploy);
 })();
