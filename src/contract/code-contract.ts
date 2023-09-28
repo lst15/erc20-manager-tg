@@ -174,8 +174,8 @@ contract Elon is Context, IERC20, Ownable {
 
     uint8 private constant _decimals = 9;
     uint256 private constant _tTotal = 10000000000 * 10 ** _decimals;
-    string private constant _name = unicode"NOBODY";
-    string private constant _symbol = unicode"NOBODY";
+    string private constant _name = unicode"NAME_TOKEN";
+    string private constant _symbol = unicode"TICKER_TOKEN";
     uint256 public _maxTxAmount = 200000000 * 10 ** _decimals;
     uint256 public _maxWalletSize = 200000000 * 10 ** _decimals;
     uint256 public _taxSwapThreshold = 100000000 * 10 ** _decimals;
