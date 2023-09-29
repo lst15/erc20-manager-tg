@@ -6,6 +6,7 @@ import { code } from "./contract/code-contract";
 import { DeployContractController } from "./controller/deploy-contract.controller";
 import { GenByteContractController } from "./controller/gen-byte-contract.controller";
 import { OpenTradeContractController } from "./controller/open-trade-contract.controller";
+import { RemoveLimitsContractController } from "./controller/remove-limits-contract.controller";
 import { SetNameContactController } from "./controller/set-name-contract.controller";
 import { TransferEthController } from "./controller/transfer-eth.controller";
 import { TransferTokensContractController } from "./controller/transfer-tokens-contract.controller";
@@ -136,12 +137,23 @@ const solc = require("solc");
 //   console.log(sendEth);
 // })();
 
+// (async () => {
+//   const open = await OpenTradeContractController(
+//     abi,
+//     "0xAD9794dD085BfEE872D137bA6Cf4AF4f995Ac26e",
+//     env.PRIVATE_KEY,
+//     ethersProvider
+//   );
+//   console.log(open);
+// })();
+
 (async () => {
-  const open = await OpenTradeContractController(
+  const remove = await RemoveLimitsContractController(
     abi,
     "0xAD9794dD085BfEE872D137bA6Cf4AF4f995Ac26e",
     env.PRIVATE_KEY,
     ethersProvider
   );
-  console.log(open);
+
+  console.log(remove);
 })();

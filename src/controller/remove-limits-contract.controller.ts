@@ -1,7 +1,7 @@
 import { ethers } from "ethers";
 import { RemoveLimitsContractFactory } from "../factory/remove-limits-contract.factory";
 
-export function RemovLimitsContractController(
+export function RemoveLimitsContractController(
   abi: any,
   address: string,
   private_key: string,
