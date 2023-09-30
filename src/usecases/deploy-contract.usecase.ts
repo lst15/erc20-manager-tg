@@ -17,12 +17,7 @@ export class DeployContractUseCase {
     provider,
     abi,
     bytecode,
-  }: DeployContractUseCaseRequest): Promise<
-    | (ethers.BaseContract & {
-        deploymentTransaction(): ethers.ContractTransactionResponse;
-      } & Omit<ethers.BaseContract, keyof ethers.BaseContract>)
-    | undefined
-  > {
+  }: DeployContractUseCaseRequest) {
     const wallet = this.web3Repository.Wallet(private_key, provider);
     const contractFactory = this.web3Repository.ContractFactory(
       abi,
@@ -31,10 +26,12 @@ export class DeployContractUseCase {
     );
 
     try {
-      return await contractFactory.deploy();
+      const deploy = contractFactory.deploy({ gasLimit: 5000000 });
+      (await deploy).waitForDeployment();
+      return await deploy;
     } catch (error: any) {
       const code = error.code;
-
+      console.log(error);
       if (code == "INSUFFICIENT_FUNDS") {
         throw new InsufficientFunds();
       }

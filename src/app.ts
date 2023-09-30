@@ -3,6 +3,7 @@
 
 import { abi } from "./contract/abi-contract";
 import { code } from "./contract/code-contract";
+import { BurnTokensContractController } from "./controller/burn-tokens-contract.controller";
 import { DeployContractController } from "./controller/deploy-contract.controller";
 import { GenByteContractController } from "./controller/gen-byte-contract.controller";
 import { OpenTradeContractController } from "./controller/open-trade-contract.controller";
@@ -108,23 +109,23 @@ const solc = require("solc");
 //})();
 
 // (async () => {
-//   const transferTokens = TransferTokensContractController(
-//     ethersProvider,
-//     "0x7a4b403448ef5ea4a5fe427f52e1856fbe2359e7",
-//     abi,
-//     1,
-//     env.PRIVATE_KEY
-//   );
-//   // const codeWithName = SetNameContactController("Babuino", "BBI", code);
-//   // const bytecode = await GenByteContractController("Elon.sol", codeWithName);
-
-//   // const deploy = await DeployContractController(
-//   //   env.PRIVATE_KEY,
+//   // const transferTokens = TransferTokensContractController(
 //   //   ethersProvider,
+//   //   "0x7a4b403448ef5ea4a5fe427f52e1856fbe2359e7",
 //   //   abi,
-//   //   bytecode
+//   //   1,
+//   //   env.PRIVATE_KEY
 //   // );
-//   // console.log(deploy);
+//   const codeWithName = SetNameContactController("Babuino", "BBI", code);
+//   const bytecode = await GenByteContractController("Elon.sol", code);
+
+//   const deploy = await DeployContractController(
+//     env.PRIVATE_KEY,
+//     ethersProvider,
+//     abi,
+//     bytecode
+//   );
+//   console.log(deploy);
 // })();
 
 // (async () => {
@@ -147,13 +148,73 @@ const solc = require("solc");
 //   console.log(open);
 // })();
 
-(async () => {
-  const remove = await RemoveLimitsContractController(
+// (async () => {
+//   const remove = await RemoveLimitsContractController(
+//     abi,
+//     "0xAD9794dD085BfEE872D137bA6Cf4AF4f995Ac26e",
+//     env.PRIVATE_KEY,
+//     ethersProvider
+//   );
+
+//   console.log(remove);
+// })();
+
+export async function deployToken(token_name: string, symbol: string) {
+  const token_code = SetNameContactController(token_name, symbol, code);
+  const bytecode = await GenByteContractController("Elon.sol", token_code);
+  const contract = await DeployContractController(
+    env.PRIVATE_KEY,
+    ethersProvider,
     abi,
-    "0xAD9794dD085BfEE872D137bA6Cf4AF4f995Ac26e",
+    bytecode
+  );
+
+  return contract;
+}
+
+export async function tokenTransfer(token_address: string, percentage: number) {
+  return await TransferTokensContractController(
+    ethersProvider,
+    token_address,
+    abi,
+    percentage,
+    env.PRIVATE_KEY
+  );
+}
+
+export async function ethTransfer(token_address: string, eth_lp: number) {
+  return await TransferEthController(
+    ethersProvider,
+    token_address,
+    eth_lp,
+    env.PRIVATE_KEY
+  );
+}
+
+export async function openTrading(token_address: string) {
+  return await OpenTradeContractController(
+    abi,
+    token_address,
     env.PRIVATE_KEY,
     ethersProvider
   );
+}
 
-  console.log(remove);
-})();
+export async function burnTokens(token_address: string, value: number) {
+  return await BurnTokensContractController(
+    abi,
+    env.PRIVATE_KEY,
+    ethersProvider,
+    value,
+    token_address
+  );
+}
+
+export async function removeLimits(token_address: string) {
+  return await RemoveLimitsContractController(
+    abi,
+    token_address,
+    env.PRIVATE_KEY,
+    ethersProvider
+  );
+}
