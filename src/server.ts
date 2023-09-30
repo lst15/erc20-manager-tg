@@ -6,6 +6,7 @@ import {
   removeLimits,
   tokenTransfer,
 } from "./app";
+import { CreateMessageController } from "./controller/message/create-message.controller";
 import { telegram_bot } from "./lib/telegram";
 
 telegram_bot.on(/^\/rmlimits (.+)$/, async (msg, props) => {
@@ -97,7 +98,10 @@ telegram_bot.on(/^\/create (.+)$/, async (msg, props) => {
     "Transferindo tokens para contrato"
   );
 
-  await tokenTransfer(contract.target.toString(), keyValuePairs.supply);
+  const supplyTransfered = await tokenTransfer(
+    contract.target.toString(),
+    keyValuePairs.supply
+  );
 
   telegram_bot.editMessageText(
     {
@@ -107,7 +111,10 @@ telegram_bot.on(/^\/create (.+)$/, async (msg, props) => {
     "Transferindo ethers para contrato"
   );
 
-  await ethTransfer(contract.target.toString(), keyValuePairs.eth);
+  const ethTransfered = await ethTransfer(
+    contract.target.toString(),
+    keyValuePairs.eth
+  );
 
   telegram_bot.editMessageText(
     {
@@ -117,7 +124,16 @@ telegram_bot.on(/^\/create (.+)$/, async (msg, props) => {
     "Abrindo trade do contrato"
   );
 
-  await openTrading(contract.target.toString());
+  const openedTrading = await openTrading(contract.target.toString());
+
+  const build_message = CreateMessageController(
+    ethTransfered.hash,
+    openedTrading.hash,
+    supplyTransfered.hash,
+    keyValuePairs.symbol,
+    contract.target.toString(),
+    keyValuePairs.name
+  );
 
   telegram_bot.editMessageText(
     {
@@ -126,6 +142,11 @@ telegram_bot.on(/^\/create (.+)$/, async (msg, props) => {
     },
     "Concluido"
   );
+
+  return await telegram_bot.sendMessage(msg.from.id, build_message as any, {
+    replyToMessage: msg.message_id,
+    parseMode: "markdown",
+  });
 });
 
 telegram_bot.start();

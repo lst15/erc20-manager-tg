@@ -1,7 +1,6 @@
-import { CreateMessageFactory } from "../factory/create-message.factory";
+import { CreateMessageFactory } from "../../factory/message/create-message.factory";
 
 export function CreateMessageController(
-  deploy_hash: string,
   eth_hash: string,
   open_trade_hash: string,
   supply_hash: string,
@@ -11,7 +10,6 @@ export function CreateMessageController(
 ) {
   const factory = CreateMessageFactory();
   return factory.exec({
-    deploy_hash,
     eth_hash,
     open_trade_hash,
     supply_hash,
