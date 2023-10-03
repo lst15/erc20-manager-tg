@@ -2,6 +2,7 @@ import { telegram_bot } from "./lib/telegram";
 import { CreateRequestModel } from "./model/telegram/actions/create-request.model";
 import { CreateAction } from "./telegram/actions/create.action";
 import { OpentradeAction } from "./telegram/actions/opentrade.action";
+import { OpentradeMessageController } from "./telegram/controller/message/opentrade-message.controller";
 import { CreateDto } from "./telegram/dto/actions/create.dto";
 import { Opentrade } from "./telegram/dto/actions/opentrade.dto";
 
@@ -69,6 +70,8 @@ telegram_bot.on(/^\/opentrade (.+)$/, async (msg, props) => {
   const opened = await OpentradeAction({
     address: params.address,
   });
+
+  const message = OpentradeMessageController(opened.hash, params.address);
 
   telegram_bot.deleteMessage(initMessage.chat.id, initMessage.message_id);
 

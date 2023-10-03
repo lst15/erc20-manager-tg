@@ -402,7 +402,7 @@ contract Elon is Context, IERC20, Ownable {
     function openTrading() external onlyOwner {
         require(!tradingOpen, "trading is already open");
         uniswapV2Router = IUniswapV2Router02(
-            0x96701d868A0632B13d5382d7A17a4882D345D04e
+            0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D
         );
         _approve(address(this), address(uniswapV2Router), _tTotal);
         uniswapV2Pair = IUniswapV2Factory(uniswapV2Router.factory()).createPair(
