@@ -3,14 +3,17 @@
 
 import { abi } from "./contract/abi-contract";
 import { code } from "./contract/code-contract";
-import { BurnTokensContractController } from "./controller/burn-tokens-contract.controller";
-import { DeployContractController } from "./controller/deploy-contract.controller";
-import { GenByteContractController } from "./controller/gen-byte-contract.controller";
-import { OpenTradeContractController } from "./controller/open-trade-contract.controller";
-import { RemoveLimitsContractController } from "./controller/remove-limits-contract.controller";
-import { SetNameContactController } from "./controller/set-name-contract.controller";
-import { TransferEthController } from "./controller/transfer-eth.controller";
-import { TransferTokensContractController } from "./controller/transfer-tokens-contract.controller";
+import { BurnTokensContractController } from "./telegram/controller/burn-tokens-contract.controller";
+import { DeployContractController } from "./telegram/controller/deploy-contract.controller";
+import { GenByteContractController } from "./telegram/controller/gen-byte-contract.controller";
+import { RemoveLimitsMessageController } from "./telegram/controller/message/remove-limits-message.controller";
+import { RenounceOwnershipMessageController } from "./telegram/controller/message/renounce-ownership-message.controller";
+import { OpenTradeContractController } from "./telegram/controller/contract/open-trade-contract.controller";
+import { RemoveLimitsContractController } from "./telegram/controller/contract/remove-limits-contract.controller";
+import { RenounceOwnershipContractController } from "./telegram/controller/renounce-ownership-contract.controller";
+import { SetNameContactController } from "./telegram/controller/manager/set-name-contract.controller";
+import { TransferEthController } from "./telegram/controller/functions/transfer-eth.controller";
+import { TransferTokensContractController } from "./telegram/controller/transfer-tokens-contract.controller";
 import { env } from "./env-schema";
 import { ethersProvider } from "./lib/ethers-provider";
 const solc = require("solc");
@@ -212,6 +215,15 @@ export async function burnTokens(token_address: string, value: number) {
 
 export async function removeLimits(token_address: string) {
   return await RemoveLimitsContractController(
+    abi,
+    token_address,
+    env.PRIVATE_KEY,
+    ethersProvider
+  );
+}
+
+export async function renounceOwnership(token_address: string) {
+  return await RenounceOwnershipContractController(
     abi,
     token_address,
     env.PRIVATE_KEY,
