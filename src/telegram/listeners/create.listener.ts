@@ -35,9 +35,13 @@ export function CreateListener(telegram_bot: telebot) {
 
     telegram_bot.deleteMessage(initMessage.chat.id, initMessage.message_id);
 
-    return await telegram_bot.sendMessage(msg.from.id, message as any, {
+    await telegram_bot.sendMessage(msg.from.id, message.message as any, {
       replyToMessage: msg.message_id,
       parseMode: "markdown",
+    });
+
+    await telegram_bot.sendDocument(initMessage.chat.id, message.code_path, {
+      replyToMessage: msg.message_id,
     });
   });
 }

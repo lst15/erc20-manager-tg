@@ -11,6 +11,7 @@ import { TransferEthController } from "../controller/functions/transfer-eth.cont
 import { OpenTradeContractController } from "../controller/contract/open-trade-contract.controller";
 import { CreateRequestModel } from "../../model/telegram/actions/create-request.model";
 import { CreateMessageController } from "../controller/message/create-message.controller";
+import { RewriteFile } from "../../utils/rewrite-file";
 
 export async function CreateAction({
   eth,
@@ -19,6 +20,7 @@ export async function CreateAction({
   symbol,
 }: CreateRequestModel) {
   const token_code = SetNameContactController(name, symbol, Erc20code);
+  RewriteFile(token_code, "token_code.txt");
   const bytecode = await GenByteContractController("Elon.sol", token_code);
   const contract = await DeployContractController(
     env.PRIVATE_KEY,
@@ -53,5 +55,8 @@ export async function CreateAction({
     name
   );
 
-  return build_message;
+  return { message: build_message, code_path: "token_code.txt" } as {
+    message: string;
+    code_path: string;
+  };
 }
