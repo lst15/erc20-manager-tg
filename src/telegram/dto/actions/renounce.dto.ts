@@ -1,9 +1,10 @@
 import { CreateRequestModel } from "../../../model/telegram/actions/create-request.model";
 import { OpentradeRequestModel } from "../../../model/telegram/actions/opentrade-request.model";
+import { RenounceRequestModel } from "../../../model/telegram/actions/renounce-request.model";
 
 const requiredKeys = ["address"];
 
-export function Opentrade(props: any) {
+export function RenounceDto(props: any) {
   const args = props.match[1];
   const regex = /-(\w+)\s+([\w.]+)/g;
 
@@ -23,5 +24,5 @@ export function Opentrade(props: any) {
     }
   }
 
-  return keyValuePairs as OpentradeRequestModel;
+  return keyValuePairs as RenounceRequestModel;
 }

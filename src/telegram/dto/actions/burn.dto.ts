@@ -2,9 +2,9 @@ import { BurnRequestModel } from "../../../model/telegram/actions/burn-request.m
 import { CreateRequestModel } from "../../../model/telegram/actions/create-request.model";
 import { OpentradeRequestModel } from "../../../model/telegram/actions/opentrade-request.model";
 
-const requiredKeys = ["address"];
+const requiredKeys = ["address", "value"];
 
-export function Opentrade(props: any) {
+export function BurnDto(props: any) {
   const args = props.match[1];
   const regex = /-(\w+)\s+([\w.]+)/g;
 
