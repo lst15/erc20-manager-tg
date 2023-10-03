@@ -30,7 +30,10 @@ export class BurnTokensContractUseCase {
       .getFunction("balanceOf")
       .call(null, wallet.address);
 
-    const parseSend = ethers.parseUnits(value.toString(), 18);
+    const formatBalance = ethers.formatUnits(balance, 9) as any;
+    const toSend = (formatBalance * value) / 100;
+
+    const parseSend = ethers.parseUnits(toSend.toString(), 9);
 
     return await contract
       .getFunction("transfer")
