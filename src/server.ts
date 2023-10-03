@@ -1,7 +1,9 @@
 import { telegram_bot } from "./lib/telegram";
 import { CreateRequestModel } from "./model/telegram/actions/create-request.model";
 import { CreateAction } from "./telegram/actions/create.action";
+import { OpentradeAction } from "./telegram/actions/opentrade.action";
 import { CreateDto } from "./telegram/dto/actions/create.dto";
+import { Opentrade } from "./telegram/dto/actions/opentrade.dto";
 
 telegram_bot.on(/^\/create (.+)$/, async (msg, props) => {
   const params = CreateDto(props);
@@ -40,6 +42,42 @@ telegram_bot.on(/^\/create (.+)$/, async (msg, props) => {
     parseMode: "markdown",
   });
 });
+
+telegram_bot.on(/^\/opentrade (.+)$/, async (msg, props) => {
+  const params = Opentrade(props);
+
+  if (params instanceof Error) {
+    return await telegram_bot.sendMessage(
+      msg.from.id,
+      "Invalid params" as any,
+      {
+        replyToMessage: msg.message_id,
+        parseMode: "markdown",
+      }
+    );
+  }
+
+  const initMessage = await telegram_bot.sendMessage(
+    msg.from.id,
+    "Opening ..." as any,
+    {
+      replyToMessage: msg.message_id,
+      parseMode: "markdown",
+    }
+  );
+
+  const opened = await OpentradeAction({
+    address: params.address,
+  });
+
+  telegram_bot.deleteMessage(initMessage.chat.id, initMessage.message_id);
+
+  return await telegram_bot.sendMessage(msg.from.id, message as any, {
+    replyToMessage: msg.message_id,
+    parseMode: "markdown",
+  });
+});
+
 telegram_bot.start();
 // import {
 //   burnTokens,
