@@ -8,6 +8,10 @@ type envSchema = {
   MAINNET_ENDPOINT_RPC: string;
   MAINNET_BLOCKSCAN: string;
   BLOCKSCAN: string;
+  FACTORY: string;
+  TESTNET_WETH: string;
+  MAINNET_WETH: string;
+  WETH: string;
 };
 
 export const env = process.env as envSchema;

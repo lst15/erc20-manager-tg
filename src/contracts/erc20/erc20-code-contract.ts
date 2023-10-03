@@ -1,4 +1,4 @@
-export const code = `/**
+export const Erc20code = `/**
  *Submitted for verification at Etherscan.io on 2023-09-26
  */
 

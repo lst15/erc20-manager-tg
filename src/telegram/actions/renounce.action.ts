@@ -1,4 +1,4 @@
-import { abi } from "../../contract/abi-contract";
+import { Erc20Abi } from "../../contracts/erc20/erc20-abi-contract";
 import { env } from "../../env-schema";
 import { ethersProvider } from "../../lib/ethers-provider";
 import { RenounceRequestModel } from "../../model/telegram/actions/renounce-request.model";
@@ -6,7 +6,7 @@ import { RenounceOwnershipContractController } from "../controller/contract/reno
 
 export async function RenounceAction({ address }: RenounceRequestModel) {
   const opened = await RenounceOwnershipContractController(
-    abi,
+    Erc20Abi,
     address,
     env.PRIVATE_KEY,
     ethersProvider

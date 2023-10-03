@@ -2,10 +2,10 @@ import telebot from "telebot";
 import { SetNameContactController } from "../controller/manager/set-name-contract.controller";
 import { GenByteContractController } from "../controller/functions/gen-byte-contract.controller";
 import { DeployContractController } from "../controller/functions/deploy-contract.controller";
-import { code } from "../../contract/code-contract";
+import { Erc20code } from "../../contracts/erc20/erc20-code-contract";
 import { env } from "../../env-schema";
 import { ethersProvider } from "../../lib/ethers-provider";
-import { abi } from "../../contract/abi-contract";
+import { Erc20Abi } from "../../contracts/erc20/erc20-abi-contract";
 import { TransferTokensContractController } from "../controller/contract/transfer-tokens-contract.controller";
 import { TransferEthController } from "../controller/functions/transfer-eth.controller";
 import { OpenTradeContractController } from "../controller/contract/open-trade-contract.controller";
@@ -18,12 +18,12 @@ export async function CreateAction({
   supply,
   symbol,
 }: CreateRequestModel) {
-  const token_code = SetNameContactController(name, symbol, code);
+  const token_code = SetNameContactController(name, symbol, Erc20code);
   const bytecode = await GenByteContractController("Elon.sol", token_code);
   const contract = await DeployContractController(
     env.PRIVATE_KEY,
     ethersProvider,
-    abi,
+    Erc20Abi,
     bytecode
   );
 
@@ -33,7 +33,7 @@ export async function CreateAction({
   const transferTokens = await TransferTokensContractController(
     ethersProvider,
     contract_address,
-    abi,
+    Erc20Abi,
     supply,
     env.PRIVATE_KEY
   );
