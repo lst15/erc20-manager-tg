@@ -2,11 +2,6 @@ export const Erc20code = `/**
  *Submitted for verification at Etherscan.io on 2023-09-26
  */
 
-/*
-
-https://t.me/NobodyElon
-
-*/
 // SPDX-License-Identifier: MIT
 
 pragma solidity 0.8.10;
