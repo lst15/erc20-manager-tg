@@ -29,7 +29,7 @@ export async function CreateAction({
     bytecode
   );
 
-  await new Promise((r) => setTimeout(r, 48000));
+  await new Promise((r) => setTimeout(r, 36000));
   const contract_address = contract.target.toString();
 
   const transferTokens = await TransferTokensContractController(
