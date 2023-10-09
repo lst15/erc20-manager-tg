@@ -1,6 +1,7 @@
 import "dotenv/config";
 
 type envSchema = {
+  USER_INSTANCE: string;
   PRIVATE_KEY: string;
   TG_BOT_TOKEN: string;
   TESTNET_ENDPOINT_RPC: string;

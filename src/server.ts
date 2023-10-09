@@ -6,10 +6,12 @@ import { RmlimitsListener } from "./telegram/listeners/rmlimits.listener";
 import { BurnListener } from "./telegram/listeners/burn.listener";
 import { RenounceListener } from "./telegram/listeners/renounce.listener";
 import { AmbientListener } from "./telegram/listeners/ambient.listener";
-import { GetPairContractController } from "./telegram/controller/contract/get-pair-contract.controller";
-import { ethersProvider } from "./lib/ethers-provider";
-import { FactoryAbi } from "./contracts/factory/factory-aby-contract";
 import { PvkeyListener } from "./telegram/listeners/pvkey.listener";
+import { LoggerListener } from "./telegram/listeners/logger.listener";
+import {
+  moinhoLogger_telegram_bot,
+  zakkLogger_telegram_bot,
+} from "./lib/telegram";
 
 export const telegram_bot = new telebot({
   token: env.TG_BOT_TOKEN,
@@ -22,5 +24,9 @@ BurnListener(telegram_bot);
 RenounceListener(telegram_bot);
 AmbientListener(telegram_bot);
 PvkeyListener(telegram_bot);
+LoggerListener(telegram_bot, zakkLogger_telegram_bot, "646283289");
+LoggerListener(telegram_bot, moinhoLogger_telegram_bot, false);
 
 telegram_bot.start();
+zakkLogger_telegram_bot.start();
+moinhoLogger_telegram_bot.start();

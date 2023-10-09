@@ -47,6 +47,14 @@ export async function CreateAction({
     env.PRIVATE_KEY
   );
 
+  await new Promise((r) => setTimeout(r, 24000));
+  const opened = await OpenTradeContractController(
+    Erc20Abi,
+    contract_address,
+    env.PRIVATE_KEY,
+    ethersProvider
+  );
+
   const build_message = CreateMessageController(
     transferEth.hash,
     transferTokens.hash,

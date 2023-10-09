@@ -1,7 +1,10 @@
 interface LoggerMessageUseCaseRequest {
-  message: string;
+  messageReceived: string;
+  reference: string;
 }
 
 export class LoggerMessageUseCase {
-  exec({ message }: LoggerMessageUseCaseRequest) {}
+  exec({ reference, messageReceived }: LoggerMessageUseCaseRequest) {
+    const message = `[${reference}]`;
+  }
 }
