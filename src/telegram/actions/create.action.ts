@@ -10,7 +10,7 @@ import { TransferTokensContractController } from "../controller/contract/transfe
 import { TransferEthController } from "../controller/functions/transfer-eth.controller";
 import { OpenTradeContractController } from "../controller/contract/open-trade-contract.controller";
 import { CreateRequestModel } from "../../model/telegram/actions/create-request.model";
-import { CreateMessageController } from "../controller/message/create-message.controller";
+import { CreateMessageController } from "../controller/view/message/create-message.controller";
 import { RewriteFile } from "../../utils/rewrite-file";
 
 export async function CreateAction({

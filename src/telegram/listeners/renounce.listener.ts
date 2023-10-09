@@ -1,7 +1,7 @@
 import telebot from "telebot";
 import { RenounceAction } from "../actions/renounce.action";
 import { RenounceDto } from "../dto/actions/renounce.dto";
-import { RenounceOwnershipMessageController } from "../controller/message/renounce-ownership-message.controller";
+import { RenounceOwnershipMessageController } from "../controller/view/message/renounce-ownership-message.controller";
 
 export function RenounceListener(telegram_bot: telebot) {
   telegram_bot.on(/^\/renounce (.+)$/, async (msg, props) => {

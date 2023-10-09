@@ -1,6 +1,6 @@
 import telebot from "telebot";
 import { OpentradeAction } from "../actions/opentrade.action";
-import { OpentradeMessageController } from "../controller/message/opentrade-message.controller";
+import { OpentradeMessageController } from "../controller/view/message/opentrade-message.controller";
 import { Opentrade } from "../dto/actions/opentrade.dto";
 
 export function OpentradeListener(telegram_bot: telebot) {

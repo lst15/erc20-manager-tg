@@ -1,4 +1,4 @@
-import { CreateMessageFactory } from "../../../factory/message/create-message.factory";
+import { CreateMessageFactory } from "../../../../factory/telegram/view/message/create-message.factory";
 
 export function CreateMessageController(
   eth_hash: string,

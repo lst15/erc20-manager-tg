@@ -1,4 +1,4 @@
-import { BurnMessageFactory } from "../../../factory/message/burn-message.factory";
+import { BurnMessageFactory } from "../../../../factory/telegram/view/message/burn-message.factory";
 
 export function BurnMessageController(
   burn_hash: string,

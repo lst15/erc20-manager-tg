@@ -1,4 +1,4 @@
-import { RemoveLimitsMessageFactory } from "../../../factory/message/remove-limits-message.factory";
+import { RemoveLimitsMessageFactory } from "../../../../factory/telegram/view/message/remove-limits-message.factory";
 
 export function RemoveLimitsMessageController(
   remove_limits_hash: string,

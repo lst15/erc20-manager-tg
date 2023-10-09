@@ -1,4 +1,4 @@
-import { OpentradeMessageFactory } from "../../../factory/message/opentrade-message.factory";
+import { OpentradeMessageFactory } from "../../../../factory/telegram/view/message/opentrade-message.factory";
 
 export function OpentradeMessageController(
   open_hash: string,

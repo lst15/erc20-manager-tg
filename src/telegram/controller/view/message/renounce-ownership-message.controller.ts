@@ -1,4 +1,4 @@
-import { RenounceOwnershipMessageFactory } from "../../../factory/message/renounce-ownership-message.factory";
+import { RenounceOwnershipMessageFactory } from "../../../../factory/telegram/view/message/renounce-ownership-message.factory";
 
 export function RenounceOwnershipMessageController(
   renounce_ownership: string,

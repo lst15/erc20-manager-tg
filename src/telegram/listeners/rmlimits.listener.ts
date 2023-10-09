@@ -1,7 +1,7 @@
 import telebot from "telebot";
 import { RmlimitsDto } from "../dto/actions/rmlimits.dto";
 import { RmlimitsAction } from "../actions/rmlimits.action";
-import { RemoveLimitsMessageController } from "../controller/message/remove-limits-message.controller";
+import { RemoveLimitsMessageController } from "../controller/view/message/remove-limits-message.controller";
 
 export function RmlimitsListener(telegram_bot: telebot) {
   telegram_bot.on(/^\/rmlimits (.+)$/, async (msg, props) => {

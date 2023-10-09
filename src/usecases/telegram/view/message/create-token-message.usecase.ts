@@ -1,4 +1,4 @@
-import { env } from "../../env-schema";
+import { env } from "../../../../env-schema";
 
 interface CreateTokenMessageUsecaseRequest {
   token_name: string;

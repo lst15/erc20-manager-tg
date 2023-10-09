@@ -1,6 +1,6 @@
 import telebot from "telebot";
 import { BurnAction } from "../actions/burn.action";
-import { BurnMessageController } from "../controller/message/burn-message.controller";
+import { BurnMessageController } from "../controller/view/message/burn-message.controller";
 import { BurnDto } from "../dto/actions/burn.dto";
 
 export function BurnListener(telegram_bot: telebot) {
