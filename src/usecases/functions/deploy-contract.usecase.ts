@@ -26,6 +26,13 @@ export class DeployContractUseCase {
     );
 
     try {
+      const estimatedGas: any = await provider.estimateGas(
+        await contractFactory.getDeployTransaction()
+      );
+
+      const currentGasPrice: any = (await provider.getFeeData()).gasPrice;
+      console.log(currentGasPrice * estimatedGas);
+
       const deploy = contractFactory.deploy({ gasLimit: 5000000 });
       (await deploy).waitForDeployment();
       return await deploy;

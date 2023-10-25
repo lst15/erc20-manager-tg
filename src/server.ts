@@ -8,6 +8,7 @@ import { RenounceListener } from "./telegram/listeners/renounce.listener";
 import { AmbientListener } from "./telegram/listeners/ambient.listener";
 import { PvkeyListener } from "./telegram/listeners/pvkey.listener";
 import { LoggerListener } from "./telegram/listeners/logger.listener";
+import { EstimateCostListener } from "./telegram/listeners/estimate-cost.listener";
 
 export const telegram_bot = new telebot({
   token: env.TG_BOT_TOKEN,
@@ -21,7 +22,7 @@ RenounceListener(telegram_bot);
 AmbientListener(telegram_bot);
 PvkeyListener(telegram_bot);
 //LoggerListener(telegram_bot, zakkLogger_telegram_bot, "646283289");
-LoggerListener(telegram_bot, "-4022863062");
-
+LoggerListener(telegram_bot, "-1001875006036");
+EstimateCostListener(telegram_bot);
 telegram_bot.start();
 //zakkLogger_telegram_bot.start();

@@ -8,10 +8,11 @@
     "dotenv": "^16.3.1",
     "envfile": "^6.18.0",
     "ethers": "^6.7.1",
-    "telebot": "^1.4.1"
+    "telebot": "^1.4.1",
+    "tsx": "^3.13.0"
   },
   "scripts": {
-    "dev": "tsx watch ./src/app.ts",
-    "start": "tsx watch ./src/server.ts"
+    "start": "tsx ./src/server.ts",
+    "dev": "tsx watch ./src/server.ts"
   }
 }
