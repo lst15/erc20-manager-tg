@@ -5,5 +5,5 @@ export function PvkeyDto(props: any) {
     return new Error("invalid key");
   }
 
-  return args;
+  return args.split(" ")[1];
 }

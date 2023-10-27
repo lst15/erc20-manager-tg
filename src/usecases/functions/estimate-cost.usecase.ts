@@ -30,6 +30,7 @@ export class EstimateCostUseCase {
     );
 
     const currentGasPrice: any = (await provider.getFeeData()).gasPrice;
+
     return [
       currentGasPrice * estimatedGas,
       currentGasPrice,
