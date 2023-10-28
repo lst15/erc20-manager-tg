@@ -20,7 +20,10 @@ export async function EstimateCostAction() {
   );
 
   const ether = Number(ethers.formatEther(estimateValue[0])).toFixed(5);
-  const gasPrice = Number(ethers.formatUnits(estimateValue[1], 10)).toFixed(5);
+  const gasPrice = Number(ethers.formatUnits(estimateValue[1], "gwei")).toFixed(
+    5
+  );
+
   const expectedCost = Number(ethers.formatEther(estimateValue[4])).toFixed(5);
   return [ether, gasPrice, estimateValue[2], estimateValue[3], expectedCost];
 }
