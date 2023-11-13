@@ -160,8 +160,8 @@ contract Elon is Context, IERC20, Ownable {
 
 uint256 private _initialBuyTax = 20;
     uint256 private _initialSellTax = 20;
-    uint256 private _finalBuyTax = 1;
-    uint256 private _finalSellTax = 1;
+    uint256 private _finalBuyTax = 0;
+    uint256 private _finalSellTax = 0;
     uint256 private _reduceBuyTaxAt = 25;
     uint256 private _reduceSellTaxAt = 35;
     uint256 private _preventSwapBefore = 30;
