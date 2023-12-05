@@ -5,7 +5,7 @@ import { OpentradeRequestModel } from "../../../model/telegram/actions/opentrade
 
 export function BurnDto(props: any) {
   const args = props.match[1];
-  const [address, value] = args.split(" ");
+  const [command, address, value] = args.split(" ");
 
   if (!ethers.isAddress(address) || isNaN(value)) {
     return new Error("invalid key");
