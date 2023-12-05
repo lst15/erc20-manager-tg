@@ -6,7 +6,9 @@ import { RemoveLimitsRequestModel } from "../../../model/telegram/actions/remove
 const requiredKeys = ["address"];
 
 export function RmlimitsDto(props: any) {
-  const address = props.match[1];
+  const [command, address] = props.match[1].split(" ");
+
+  return new Error("invalid key");
 
   if (!ethers.isAddress(address)) {
     return new Error("invalid key");

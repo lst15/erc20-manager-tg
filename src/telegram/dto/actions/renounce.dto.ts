@@ -6,7 +6,7 @@ import { RenounceRequestModel } from "../../../model/telegram/actions/renounce-r
 const requiredKeys = ["address"];
 
 export function RenounceDto(props: any) {
-  const address = props.match[1];
+  const [command, address] = props.match[1].split(" ");
 
   if (!ethers.isAddress(address)) {
     return new Error("invalid key");
