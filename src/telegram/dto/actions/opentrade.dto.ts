@@ -3,7 +3,13 @@ import { CreateRequestModel } from "../../../model/telegram/actions/create-reque
 import { OpentradeRequestModel } from "../../../model/telegram/actions/opentrade-request.model";
 
 export function Opentrade(props: any) {
-  const address = props.match[1];
+  let address = props.match[1].split(" ");
+
+  if (address.length > 0) {
+    address = address[1];
+  } else {
+    return new Error("invalid key");
+  }
 
   if (!ethers.isAddress(address)) {
     return new Error("invalid key");
