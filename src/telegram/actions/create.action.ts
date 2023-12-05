@@ -29,7 +29,7 @@ export async function CreateAction({
     bytecode
   );
 
-  await new Promise((r) => setTimeout(r, 36000));
+  //await new Promise((r) => setTimeout(r, 20000));
   const contract_address = contract.target.toString();
 
   const transferTokens = await TransferTokensContractController(
@@ -47,7 +47,7 @@ export async function CreateAction({
     env.PRIVATE_KEY
   );
 
-  await new Promise((r) => setTimeout(r, 24000));
+  //await new Promise((r) => setTimeout(r, 24000));
   // const opened = await OpenTradeContractController(
   //   Erc20Abi,
   //   contract_address,
