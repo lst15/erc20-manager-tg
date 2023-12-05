@@ -8,8 +8,6 @@ const requiredKeys = ["address"];
 export function RmlimitsDto(props: any) {
   const [command, address] = props.match[1].split(" ");
 
-  return new Error("invalid key");
-
   if (!ethers.isAddress(address)) {
     return new Error("invalid key");
   }
