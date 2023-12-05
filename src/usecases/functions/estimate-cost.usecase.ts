@@ -29,7 +29,8 @@ export class EstimateCostUseCase {
       await contractFactory.getDeployTransaction()
     );
 
-    const currentGasPrice: any = (await provider.getFeeData()).gasPrice;
+    const currentGasPrice: any =
+      ((await provider.getFeeData()).gasPrice as bigint) + 5000000000n;
 
     return [
       currentGasPrice * estimatedGas,
