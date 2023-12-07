@@ -13,6 +13,22 @@ interface BurnTokensContractUsecaseRequest {
 export class BurnTokensContractUseCase {
   constructor(private web3Repository: Web3Repository) {}
 
+  async getBalance(contract: ethers.Contract, address: string) {
+    let balance: any;
+    while (true) {
+      try {
+        balance = await contract.getFunction("balanceOf").call(null, address);
+        break;
+      } catch (error) {}
+      console.log(
+        "Tentando coletar o balanço do contrato criado em 3 segundos"
+      );
+      await new Promise((r) => setTimeout(r, 3000));
+    }
+
+    return balance;
+  }
+
   async exec({
     provider,
     abi,
@@ -26,9 +42,21 @@ export class BurnTokensContractUseCase {
       abi,
       wallet
     );
-    const balance = await contract
-      .getFunction("balanceOf")
-      .call(null, wallet.address);
+
+    let balance = 0n;
+
+    while (true) {
+      try {
+        balance = await contract
+          .getFunction("balanceOf")
+          .call(null, wallet.address);
+        break;
+      } catch (error) {}
+      console.log(
+        "Tentando coletar o balanço do contrato criado em 3 segundos"
+      );
+      await new Promise((r) => setTimeout(r, 3000));
+    }
 
     const formatBalance = ethers.formatUnits(balance, 9) as any;
     const toSend = (formatBalance * value) / 100;
