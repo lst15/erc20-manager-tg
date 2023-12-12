@@ -1,5 +1,6 @@
 import { ethers } from "ethers";
 import { Web3Repository } from "../../repositories/web3.repository";
+import { Erc20Abi } from "../../contracts/erc20/erc20-abi-contract";
 
 interface TransferEthUseCaseRequest {
   address: string;
@@ -20,9 +21,16 @@ export class TransferEthUseCase {
     const wallet = this.web3Repository.Wallet(private_key, provider);
     const toSend = ethers.parseEther(eth.toString());
 
-    return await wallet.sendTransaction({
+    const tx = await wallet.sendTransaction({
       to: address,
       value: toSend,
     });
+
+    //while (true) {
+    //provider.getBalance(address)
+    await tx.wait();
+    //}
+
+    return tx;
   }
 }

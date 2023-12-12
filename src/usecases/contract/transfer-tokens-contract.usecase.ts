@@ -59,7 +59,11 @@ export class TransferTokensContractUseCase {
     const parseSend = ethers.parseUnits(toSend.toString(), 9);
 
     try {
-      return await contract.getFunction("transfer").send(address, parseSend);
+      const tx = await contract
+        .getFunction("transfer")
+        .send(address, parseSend);
+      await tx.wait();
+      return tx;
     } catch (error) {
       throw new Error(`transferTokensContract: ${error}`);
     }
