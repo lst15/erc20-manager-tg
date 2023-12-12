@@ -26,7 +26,7 @@ export function BurnListener(telegram_bot: telebot) {
         parseMode: "markdown",
       }
     );
-
+    console.log("aq", params.address);
     const opened = await BurnAction({
       address: params.address,
       value: params.value,

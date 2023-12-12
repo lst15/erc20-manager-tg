@@ -16,7 +16,7 @@ export async function BurnAction({ address, value }: BurnRequestModel) {
     ethersProvider,
     FactoryAbi
   );
-
+  console.log(pair);
   const opened = await BurnTokensContractController(
     Erc20Abi,
     env.PRIVATE_KEY,

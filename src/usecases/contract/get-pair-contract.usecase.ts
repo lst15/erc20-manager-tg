@@ -27,7 +27,7 @@ export class GetPairContractUseCase {
       factoryAbi,
       wallet
     );
-
+    console.log(tokenA, tokenB);
     return await contract.getFunction("getPair").call(null, tokenA, tokenB);
   }
 }

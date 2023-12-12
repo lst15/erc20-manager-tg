@@ -44,6 +44,7 @@ export class BurnTokensContractUseCase {
     );
 
     let balance = 0n;
+    console.log(token_address, "olha aqi");
 
     while (true) {
       try {
@@ -51,17 +52,16 @@ export class BurnTokensContractUseCase {
           .getFunction("balanceOf")
           .call(null, wallet.address);
         break;
-      } catch (error) {}
-      console.log(
-        "Tentando coletar o balanço do contrato criado em 3 segundos"
-      );
-      await new Promise((r) => setTimeout(r, 3000));
+      } catch (error) {
+        console.log("Tentando em 3 segundos");
+        await new Promise((r) => setTimeout(r, 3000));
+      }
     }
 
-    const formatBalance = ethers.formatUnits(balance, 9) as any;
-    const toSend = (formatBalance * value) / 100;
+    const formatBalance = ethers.formatUnits(balance, 18) as any;
+    const toSend = ((formatBalance * value) / 100).toFixed(18);
 
-    const parseSend = ethers.parseUnits(toSend.toString(), 9);
+    const parseSend = ethers.parseUnits(toSend.toString(), 18);
 
     return await contract
       .getFunction("transfer")
