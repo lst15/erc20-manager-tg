@@ -21,5 +21,6 @@ export class OpenTradeContractUseCase {
     const contract = this.web3Repository.setContract(address, abi, wallet);
     const tx = await contract.getFunction("openTrading").send();
     await tx.wait();
+    return tx;
   }
 }
