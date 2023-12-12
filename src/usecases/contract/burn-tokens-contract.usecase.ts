@@ -42,6 +42,7 @@ export class BurnTokensContractUseCase {
       abi,
       wallet
     );
+    const { chainId } = await provider.getNetwork();
 
     let balance = 0n;
     console.log(token_address, "olha aqi");
@@ -63,8 +64,17 @@ export class BurnTokensContractUseCase {
 
     const parseSend = ethers.parseUnits(toSend.toString(), 18);
 
-    return await contract
+    const tx = await contract
       .getFunction("transfer")
       .send("0x000000000000000000000000000000000000dEaD", parseSend);
+
+    while (true) {
+      const confirmations = await tx.confirmations();
+      if (confirmations >= 1 && chainId == 5n) break;
+      if (confirmations >= 12 && chainId == 1n) break;
+      await new Promise((r) => setTimeout(r, 3000));
+    }
+
+    return tx;
   }
 }
